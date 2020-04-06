@@ -8,15 +8,16 @@ namespace BotApp
     {
     public class Ravintolat
         {
-        string nimi;
-        string ateriat;
-        string osoite;
+        public string Nimi;
+        public string Ateriat;
+        public string Osoite;
+
 
         public Ravintolat (string nimi, string ateriat, string osoite)
             {
-            this.nimi = nimi;
-            this.ateriat = ateriat;
-            this.osoite = osoite;
+            this.Nimi = nimi;
+            this.Ateriat = ateriat;
+            this.Osoite = osoite;
             }
         }
     }

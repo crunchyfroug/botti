@@ -22,6 +22,9 @@ namespace BotApp
 				client.UseDefaultCredentials = true;
 				client.Headers.Add("User-Agent: Other");
 				string html = client.DownloadString(urlAddress);
+
+				//poistetaan välit + lisätään UTF-8
+				html = Regex.Replace(html, @"\s*(<[^>]+>)\s*", "$1");
 				byte[] bytes = Encoding.Default.GetBytes(html);
 				data = Encoding.UTF8.GetString(bytes);
 				};
@@ -29,112 +32,85 @@ namespace BotApp
 			}
 		// ottaa talteen paikkojen nimet listaan
 
-			static List<string> GetNames (string data, List<string> nimet)
+		static List<string> GetNames (Match data, List<string> namesList)
 			{
 			string pattern = "<h3.*?>(.*?)<\\/h3>";
-			string nimi;
-			nimet = new List<string>();
-			MatchCollection match = Regex.Matches(data, pattern);
-				foreach (Match m in match)
-					{
-					nimi = m.Groups[1].Value;
-					nimi = Regex.Replace(nimi, "<.*?>", String.Empty);
-					nimet.Add(nimi);
-					}
-			return nimet;
+			data = Regex.Match(data.Value, pattern);
+			string name;
+			namesList = new List<string>();
+				name = data.Value;
+				name = Regex.Replace(name, "<.*?>", String.Empty);
+				namesList.Add(name);
+			return namesList;
 			}
 
 		// kerää kaikki osoitteet listaan
-		static List<string> GetAddress (string data, List<string> addresses)
+		static List<string> GetAddress (Match data, List<string> addressList)
 			{
 			string pattern = "<p[^>] *class=\"dist.*?\"(.*?)>";
 			string address;
-			addresses = new List<string>();
-			MatchCollection match = Regex.Matches(data, pattern);
-			Console.WriteLine("{0} matches found", match.Count);
-			foreach (Match m in match)
-				{
-				address = m.Groups[1].Value;
-				address = address.Replace(" " + "title=\"", "").Replace("\"", "");
-				address = Regex.Replace(address, "<.*?>", ",");
-				addresses.Add(address);
-				}
-			return addresses;
+			addressList = new List<string>();
+			Match match = Regex.Match(data.Value, pattern);
+
+				address = match.Value;
+				address = Regex.Replace(address, "<p class=\"dist\" title=\"", String.Empty);
+				address = Regex.Replace(address, "\">", String.Empty);
+				addressList.Add(address);
+				
+			return addressList;
 			}
-		static List<string> GetMeals (string data, List<string> mealList)
+
+			//kerää ateriat
+		static List<string> GetMeals (Match data, List<string> mealList)
 			{
 			string pattern = "<li [^>]*class=\"menu-ite.*?\"(.*?)</div>";
 			string meal;
-			MatchCollection match = Regex.Matches(data, pattern);
-			
+			Match match = Regex.Match(data.Value, pattern);
+			mealList = new List<string>();
 
-			foreach (Match m in match)
-				{
-				meal = m.Groups[1].Value;
+				meal = match.Value;
 				meal = meal.Replace("<p class=\"dish\">", "\n");
 				meal = Regex.Replace(meal, "<.*?>", "");
-				meal = meal.Replace(">", "").Replace(" l ", "Laktoositon, ")
-				.Replace(" g ", "Gluteeniton, ").Replace(" m ", "Maidoton, ")
-				;
-				Console.WriteLine(meal);
-				mealList.Add(meal);
-				Console.WriteLine();
-				Console.WriteLine();
-				}
-
+			meal = meal.Replace("l ", " Laktoositon, ")
+			.Replace("g ", "Gluteeniton, ").Replace("m ", "Maidoton, ")
+			;
+			mealList.Add(meal);
 			return mealList;
 			}
+
 		static List<Ravintolat> RestaurantList = new List<Ravintolat>();
 
-		// lisää ravintolat listaan
-		static void AddRestaurant(List<string> name, List<string> meals, List<string> address)
+		//lisää kaikkien ravintoloiden tiedot yhteen listaan
+		static void AddRestaurant (List<string> name, List<string> meals, List<string> address, string data)
 			{
-			
 			Ravintolat restaurant;
-			try
-				{
-				for (int i = 0 ; i < name.Count || i < meals.Count || i< address.Count ;)
-					{
-					restaurant = new Ravintolat(name[i], meals[i], address[i]);
-					RestaurantList.Add(restaurant);
-					i++;
-					}
-				}
-			catch (System.IO.IOException e)
-				{
-				Console.WriteLine(e);
-				}
-			finally
-				{
-				
-				}
+			string pattern = "<div [^>]*class=\"menu item.*?\"(.*?)</div></div>" +
+			"<div [^>]*class=\"item.*?\"(.*?)</div><div [^>]*class=\"item.*?\"(.*?)</div>";
 
+			MatchCollection matches = Regex.Matches(data, pattern);
+			foreach (Match m in matches)
+				{
+				int i = 0;
+				name = GetNames(m, name);
+				meals = GetMeals(m, meals);
+				address = GetAddress(m, address);
+
+				restaurant = new Ravintolat(name[i], meals[i], address[i]);
+				RestaurantList.Add(restaurant);
+				i++;
+				}
 			}
-		static void Main(string[] args)
-		{
+
+		static void Main (string[] args)
+			{
 			List<string> addressList = new List<string>();
 			List<string> nameList = new List<string>();
 			List<string> mealList = new List<string>();
 			string data = null;
-
-			//string div_pattern = "<div.*?>(.*?)<\\/div>";
-			//string body_pattern = "<div [^>]*class=\"item-body*?\"(.*?)</div>";
-			//string item_pattern = "<div [^>]*class=\"menu item.*?\"(.*?)</div>";
-			//string dish_pattern = "<p [^>]*class=\"dish\"(.*?)</p>";
 			data = GetData(data);
 
-			//addressList = GetAddress(data, addressList);
-			//nameList = GetNames(data, nameList);
-			mealList = GetMeals(data, mealList);
-			addressList = GetAddress(data, addressList);
-			nameList = GetNames(data, nameList);
+			AddRestaurant(nameList, mealList, addressList, data);
 
-			AddRestaurant(nameList, mealList, addressList);
-			//kerää koko html-tiedostosta tietyt osiot patternin mukaan
-
-			// tallentaa jokaisen paikan, aterian ja osoitteen listaan
-
-			Console.WriteLine();
 			Console.ReadKey();
 		}
 	}
