@@ -7,7 +7,6 @@ using System.Net;
 using System.IO;
 using System.Web;
 using System.Text.RegularExpressions;
-using System.Xml;
 
 namespace BotApp
 {
@@ -78,12 +77,12 @@ namespace BotApp
 			return mealList;
 			}
 
-		static List<Ravintolat> RestaurantList = new List<Ravintolat>();
+		static List<Restaurants> RestaurantList = new List<Restaurants>();
 
 		//lisää kaikkien ravintoloiden tiedot yhteen listaan
 		static void AddRestaurant (List<string> name, List<string> meals, List<string> address, string data)
 			{
-			Ravintolat restaurant;
+			Restaurants restaurant;
 			string pattern = "<div [^>]*class=\"menu item.*?\"(.*?)</div></div>" +
 			"<div [^>]*class=\"item.*?\"(.*?)</div><div [^>]*class=\"item.*?\"(.*?)</div>";
 
@@ -95,7 +94,7 @@ namespace BotApp
 				meals = GetMeals(m, meals);
 				address = GetAddress(m, address);
 
-				restaurant = new Ravintolat(name[i], meals[i], address[i]);
+				restaurant = new Restaurants(name[i], meals[i], address[i]);
 				RestaurantList.Add(restaurant);
 				i++;
 				}

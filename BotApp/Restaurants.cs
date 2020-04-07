@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace BotApp
     {
-    public class Ravintolat
+    public class Restaurants
         {
         public string Nimi;
         public string Ateriat;
         public string Osoite;
 
 
-        public Ravintolat (string nimi, string ateriat, string osoite)
+        public Restaurants (string nimi, string ateriat, string osoite)
             {
             this.Nimi = nimi;
             this.Ateriat = ateriat;

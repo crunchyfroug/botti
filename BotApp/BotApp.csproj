@@ -43,9 +43,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App.cs" />
+    <Compile Include="GetData.cs" />
+    <Compile Include="GetInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Ravintolat.cs" />
+    <Compile Include="Restaurants.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
