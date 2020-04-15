@@ -11,7 +11,6 @@ namespace BotApp
         {
         AddRestaurant add = new AddRestaurant();
         GetData data = new GetData();
-        GetInfo info = new GetInfo();
         public void RunApp ()
             {
 
@@ -23,6 +22,7 @@ namespace BotApp
             html = data.SearchData(html);
 
             add._AddRestaurant(names, meals, address, html);
+            
         }
 
         }

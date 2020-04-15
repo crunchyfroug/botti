@@ -13,13 +13,19 @@ namespace BotApp
             {
             string pattern = "<li [^>]*class=\"menu-ite.*?\"(.*?)</div>";
             Match match = Regex.Match(html, pattern);
+
             html = match.Value;
-            html = html.Replace("<p class=\"dish\">", "\n");
-            html = Regex.Replace(html, "<.*?>", "");
-            html = html.Replace("l ", " Laktoositon, ")
-            .Replace("g ", "Gluteeniton, ").Replace("m ", "Maidoton, ");
+            html = html.Replace("</p>", ", ");
+            html = html.Replace("</li>", "\n\n");
+            html = html.Replace("<a href=\"#l\" title=\"", " (").Replace("\" class=\"diet diet-l\">l", ")").ToLower();
+            html = html.Replace("<a href=\"#g\" title=\"", " (").Replace("\" class=\"diet diet-g\">g", ")").ToLower();
+            html = html.Replace("<a href=\"#m\" title=\"", " (").Replace("\" class=\"diet diet-m\">m", ")").ToLower();
+            html = html.Replace("<a href=\"#vl\" title=\"", " (").Replace("\" class=\"diet diet-vl\">vl", ")").ToLower();
+            html = Regex.Replace(html, "<.*?>", String.Empty).Replace(">", String.Empty);
+
             return html;
             }
+            
 
         public string Address (string html)
             {

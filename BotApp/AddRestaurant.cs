@@ -19,9 +19,9 @@ namespace BotApp
 			"<div [^>]*class=\"item.*?\"(.*?)</div><div [^>]*class=\"item.*?\"(.*?)</div>";
 
 			MatchCollection matches = Regex.Matches(data, pattern);
+			int i = 0;
 			foreach (Match m in matches)
 				{
-				int i = 0;
 				name = info.ReturnName(name,m);
 				meals = info.ReturnMeal(meals, m);
 				address = info.ReturnAddress(address, m);
