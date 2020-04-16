@@ -47,6 +47,7 @@
     <Compile Include="App.cs" />
     <Compile Include="GetData.cs" />
     <Compile Include="GetInfo.cs" />
+    <Compile Include="Lists.cs" />
     <Compile Include="ParseHTML.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

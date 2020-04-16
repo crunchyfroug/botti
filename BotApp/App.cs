@@ -11,17 +11,14 @@ namespace BotApp
         {
         AddRestaurant add = new AddRestaurant();
         GetData data = new GetData();
+        Lists lists = new Lists();
         public void RunApp ()
             {
-
-            List<string> names = new List<string>();
-            List<string> meals = new List<string>();
-            List<string> address = new List<string>();
 
             string html = null;
             html = data.SearchData(html);
 
-            add._AddRestaurant(names, meals, address, html);
+            add._AddRestaurant(lists.names, lists.meals, lists.address, html);
             
         }
 
