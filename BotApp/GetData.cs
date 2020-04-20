@@ -9,7 +9,7 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace BotApp
 	{
-	class GetData
+	public class GetData
 		{
 		public string SearchData (string data)
 			{

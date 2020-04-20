@@ -8,8 +8,24 @@ namespace BotApp
     {
     class Lists
         {
-        public List<string> names = new List<string>();
-        public List<string> meals = new List<string>();
-        public List<string> address = new List<string>();
+        private List<string> names = new List<string>();
+        private List<string> meals = new List<string>();
+        private List<string> address = new List<string>();
+
+        public List<string> Names
+            {
+            get => names;
+            set => names = value;
+            }
+        public List<string> Meals
+            {
+            get => meals;
+            set => meals = value;
+            }
+        public List<string> Address
+            {
+            get => address;
+            set => address = value;
+            }
         }
     }

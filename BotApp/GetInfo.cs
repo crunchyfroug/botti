@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BotApp
     {
-    public class GetInfo
+    class GetInfo
         {
         ParseHTML parse = new ParseHTML();
 
