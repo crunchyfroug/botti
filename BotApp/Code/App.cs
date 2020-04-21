@@ -9,12 +9,12 @@ using System.Threading.Tasks;
 
 namespace BotApp
     {
-    class App
+    public class App
         {
         AddRestaurant add = new AddRestaurant();
         GetData data = new GetData();
         Lists lists = new Lists();
-        
+        public string urladdress = "https://www.lounaat.info/jyvaskyla";
         public void RunApp ()
             {
 
@@ -24,7 +24,7 @@ namespace BotApp
             try
                 {
                 html = null;
-                html = data.SearchData(html);
+                html = data.SearchData(html,urladdress);
 
                 }
                 catch {

@@ -11,17 +11,27 @@ namespace BotTests
         public void SearchData_ReturnHtml ()
             {
             //arrange
-
+            string urladdress = "https://www.lounaat.info/jyvaskyla";
             var result = "";
             var getData = new GetData();
 
 
             //act
-            result = getData.SearchData(result);
+            result = getData.SearchData(result, urladdress);
 
             //assert
-            Assert.IsNotNull(result);
+            Assert.IsTrue(result != null);
             Assert.AreNotEqual("", result);
+            }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException),
+        "Code returns null")]
+        public void SearchData_DoesntReturnAnyValue ()
+            {
+            var app = new App();
+            app.urladdress = "";
+            app.RunApp();
             }
         }
     }

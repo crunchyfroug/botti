@@ -8,9 +8,9 @@ using System.Text.RegularExpressions;
 namespace BotApp
     {
 
-    class AddRestaurant
+    public class AddRestaurant
         {
-		public List<Restaurants> restaurants = new List<Restaurants>();
+		public 
 		GetInfo info = new GetInfo();
         public void _AddRestaurant (List<string> name, List<string> meals, List<string> address, string data)
             {

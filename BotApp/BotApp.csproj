@@ -100,15 +100,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AddRestaurant.cs" />
-    <Compile Include="App.cs" />
-    <Compile Include="GetData.cs" />
-    <Compile Include="GetInfo.cs" />
-    <Compile Include="Lists.cs" />
-    <Compile Include="ParseHTML.cs" />
+    <Compile Include="Code\AddRestaurant.cs" />
+    <Compile Include="Code\App.cs" />
+    <Compile Include="Code\GetData.cs" />
+    <Compile Include="Code\GetInfo.cs" />
+    <Compile Include="Code\Lists.cs" />
+    <Compile Include="Code\ParseHTML.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Restaurants.cs" />
+    <Compile Include="Code\Restaurants.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

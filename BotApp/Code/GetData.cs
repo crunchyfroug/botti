@@ -11,14 +11,13 @@ namespace BotApp
 	{
 	public class GetData
 		{
-		public string SearchData (string data)
+		public string SearchData (string data, string url)
 			{
-			string urlAddress = "https://www.lounaat.info/jyvaskyla";
 			using (WebClient client = new WebClient())
 				{
 				client.UseDefaultCredentials = true;
 				client.Headers.Add("User-Agent: Other");
-				string html = client.DownloadString(urlAddress);
+				string html = client.DownloadString(url);
 
 				//poistetaan välit + lisätään UTF-8
 				html = Regex.Replace(html, @"\s*(<[^>]+>)\s*", "$1");
