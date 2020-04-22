@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BotApp
     {
-    class Lists
+    public class Lists
         {
         private List<string> names = new List<string>();
         private List<string> meals = new List<string>();

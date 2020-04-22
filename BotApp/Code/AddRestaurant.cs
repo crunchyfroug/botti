@@ -10,10 +10,11 @@ namespace BotApp
 
     public class AddRestaurant
         {
-		public 
+		public List<Restaurants> restaurants = new List<Restaurants>();
 		GetInfo info = new GetInfo();
         public void _AddRestaurant (List<string> name, List<string> meals, List<string> address, string data)
             {
+			
 			Restaurants restaurant;
 			string pattern = "<div [^>]*class=\"menu item.*?\"(.*?)</div></div>" +
 			"<div [^>]*class=\"item.*?\"(.*?)</div><div [^>]*class=\"item.*?\"(.*?)</div>";

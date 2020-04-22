@@ -11,19 +11,35 @@ namespace BotTests
         [TestMethod]
         public void Test_AddRestaurant_ReturnValuesToLists ()
             {
-            var getdata = new GetData();
-
+            //arrange
+            var lists = new Lists();
+            var getData = new GetData();
+            var addRestaurant = new AddRestaurant();
+            List<Restaurants> restaurantList = new List<Restaurants>();
+            int i = 0;
             string url = "https://www.lounaat.info/jyvaskyla";
 
             var html = "";
-            html = getdata.SearchData(html, url);
-            //arrange
-            var result ="";
+            html = getData.SearchData(html, url);
 
             //act
+
+            addRestaurant._AddRestaurant(lists.Names, lists.Meals, lists.Address, html);
+
             //result = addrestaurant._AddRestaurant()
 
             //assert
+            foreach(var item in restaurantList)
+                {
+                Assert.IsNotNull(lists.Names[i]);
+                Assert.IsNotNull(lists.Meals[i]);
+                Assert.IsNotNull(lists.Address[i]);
+
+                Assert.AreNotEqual("", lists.Names[i]);
+                Assert.AreNotEqual("", lists.Meals[i]);
+                Assert.AreNotEqual("", lists.Address[i]);
+                i++;
+                }
 
 
             }
