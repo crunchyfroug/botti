@@ -10,7 +10,7 @@ namespace BotApp
 
     public class AddRestaurant
         {
-		public List<Restaurants> restaurants = new List<Restaurants>();
+		public List<Restaurants> restaurantList = new List<Restaurants>();
 		GetInfo info = new GetInfo();
         public void _AddRestaurant (List<string> name, List<string> meals, List<string> address, string data)
             {
@@ -28,7 +28,7 @@ namespace BotApp
 				address = info.ReturnAddress(address, m);
 
 				restaurant = new Restaurants(name[i], meals[i], address[i]);
-				restaurants.Add(restaurant);
+				restaurantList.Add(restaurant);
 				i++;
 				}
 			}

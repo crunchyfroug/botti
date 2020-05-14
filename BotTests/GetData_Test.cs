@@ -10,18 +10,14 @@ namespace BotTests
         [TestMethod]
         public void SearchData_ReturnHtml ()
             {
-            //arrange
             string urladdress = "https://www.lounaat.info/jyvaskyla";
             var result = "";
             var getData = new GetData();
 
 
-            //act
             result = getData.SearchData(result, urladdress);
 
-            //assert
-            Assert.IsTrue(result != null);
-            Assert.AreNotEqual("", result);
+            Assert.IsNotNull(result);
             }
 
         [TestMethod]

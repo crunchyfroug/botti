@@ -20,7 +20,7 @@ namespace BotApp
 
 
             //add try, catch (argumentnullexception)
-            string html = null;
+            var html = "";
             try
                 {
                 html = null;
@@ -33,8 +33,12 @@ namespace BotApp
                 
                 
                 }
-
+            int i = 1;
             add._AddRestaurant(lists.Names, lists.Meals, lists.Address, html);
+            foreach (var item in add.restaurantList)
+                {
+                
+                }
             
         }
 
